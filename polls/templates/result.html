@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h3 style = "margin-bottom: 20px"><strong>Results</strong></h3>
+
+<h4>{{question.question}}</h4>
+
+<ul class="list-group">
+{% for option in options %}
+<li class="list-group-item d-flex justify-content-between align-items-center">
+    {{option.option}}
+    <span class="badge bg-primary rounded-pill">{{option.vote}}%</span>
+  </li>
+  {% endfor %}
+
+
+  
+</ul>
+
+ <!-- All Previous Comment -->
+ <div class="media mb-4">
+  <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+      
+      {% for comment in comment %}
+
+      <div class="media-body">
+
+      <h5 class="mt-0">{{comment.commenter}}</h5>
+      {{comment.body}}
+     
+  </div>
+  {% endfor %}
+</div>
+
+
+
+
+
+
+
+{% endblock %}

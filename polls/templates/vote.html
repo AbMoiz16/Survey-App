@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3 style = "margin-bottom: 20px"><strong>Pick Your Choice</strong></h3>
+
+<h4>{{question.question}}</h4>
+
+<form method="POST" action=" {% url 'result' question.id %} ">
+    {% csrf_token %}
+<ul class="list-group" style="margin:0px">
+    {% for option in options %}
+    
+    <label>
+        <li class="list-group-item">
+            <input class="form-check-input me-1" type="radio" name = 'choice' value="{{option.id}}" aria-label="...">
+            {{option.option}}
+          </li>
+    </label>
+   {%endfor%}
+
+</ul>
+<br> 
+
+<h5 class="card-header">Leave a Comment:</h5>
+        <!-- Get Comment -->
+<div class="card-body">
+            
+  {%csrf_token%}
+            <!--<div class="form-group">
+              <textarea class="form-control" rows="3"></textarea>
+            </div> -->
+  {{form.commenter}}<br>
+  {{form.body}}<br>
+          
+</div>
+  
+<input type="submit" value = "Submit" class = 'btn btn-primary'>
+</form>
+  
+    {% comment %} <!-- Comments Form -->
+    <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+          <form method = "POST">
+              {%csrf_token%}
+            <!--<div class="form-group">
+              <textarea class="form-control" rows="3"></textarea>
+            </div> -->
+            {{form.commenter}}<br>
+            {{form.body}}<br>
+             <button type="submit" class="btn btn-primary">Submit</button> 
+          </form>
+        </div>
+    </div> {% endcomment %}
+
+      {% comment %} <!-- Single Comment -->
+      <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            
+            {% for comment in comment %}
+
+            <div class="media-body">
+
+            <h5 class="mt-0">{{comment.commenter}}</h5>
+            {{comment.body}}
+           
+        </div>
+        {% endfor %}
+      </div> {% endcomment %}
+      
+    
+
+
+    
+   
+    
+
+
+    
+
+
+ 
+
+
+
+{% endblock %}
